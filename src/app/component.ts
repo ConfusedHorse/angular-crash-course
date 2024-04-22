@@ -1,6 +1,6 @@
-import { Component, QueryList, ViewChildren, computed, signal, viewChildren } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RectangleComponent } from './rectangle/component';
-import { Rectangle } from './rectangle/model';
+import { RectangleStore } from './store';
 
 @Component({
   selector: 'app-root',
@@ -10,19 +10,12 @@ import { Rectangle } from './rectangle/model';
   ],
   templateUrl: 'component.html',
   styleUrl: 'component.scss',
+  providers: [
+    RectangleStore,
+  ]
 })
 export class AppComponent {
 
-  #testArray = signal(Array.from({ length: 50 }));
-
-  protected _rectangles = computed<ReadonlyArray<Rectangle>>(() => this.#testArray().map((_, index) => ({ index, hue: this.#getHue(index) })));
-
-  #getHue(index: number): number {
-    return index / this.#testArray().length * 360 % 360;
-  }
-
-  protected _onRectangleChange(rectangle: Rectangle): void {
-    console.log(rectangle);
-  }
+  protected _store = inject(RectangleStore);
 
 }

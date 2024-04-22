@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, Input, input, output } from '@angular/core';
+import { Component, HostBinding, HostListener, input, output } from '@angular/core';
 import { Rectangle } from './model';
 
 @Component({
@@ -14,11 +14,18 @@ export class RectangleComponent {
     return this.rectangle().hue;
   }
 
-  @HostListener('click', ['$event']) onRectangleChange() {
-    this.rectangleChange.emit(this.rectangle());
+  @HostListener('click', ['$event']) protected _leftClick(): boolean {
+    this.duplicate.emit(this.rectangle());
+    return false;
+  }
+
+  @HostListener('contextmenu', ['$event']) protected _rightClick() {
+    this.remove.emit(this.rectangle());
+    return false;
   }
   
-  public rectangleChange = output<Rectangle>();
+  public duplicate = output<Rectangle>();
+  public remove = output<Rectangle>();
 
   public rectangle = input.required<Rectangle>();
 

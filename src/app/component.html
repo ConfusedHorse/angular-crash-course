@@ -1,5 +1,9 @@
 <section class="rectangles">
-  @for (rectangle of _rectangles(); track rectangle.index) {
-    <rectangle class="rectangle" [rectangle]="rectangle" (rectangleChange)="_onRectangleChange($event)"/>
+  @for (rectangle of _store.rectanglesWithHue(); track rectangle.index) {
+    <rectangle class="rectangle"
+      [rectangle]="rectangle"
+      (duplicate)="_store.duplicate($event)"
+      (remove)="_store.remove($event)"
+    />
   }
 </section>
