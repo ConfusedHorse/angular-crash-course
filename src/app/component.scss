@@ -1,0 +1,15 @@
+:host {
+  $app-dings: 3em;
+
+  display: grid;
+  padding-block: 1em;
+  grid-template-columns: [app-start] $app-dings [content-start] repeat(3, minmax(auto, 1fr)) [content-end] $app-dings [app-end];
+  gap: 1em;
+
+  >.rectangles {
+    display: grid;
+    grid-column: content;
+    grid-template-columns: subgrid;
+    gap: inherit
+  }
+}

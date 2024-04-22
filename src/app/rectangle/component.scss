@@ -1,0 +1,24 @@
+:host {
+  block-size: 5rem;
+  border: solid;
+
+  font-size: 2em;
+  display: grid;
+  place-content: center;
+
+  background-color: hsl(var(--hue, 0), 50%, 50%);
+  transition: scale .3s ease;
+
+  >.index {    
+    color: white;
+    mix-blend-mode: exclusion;
+  }
+
+  &:hover {
+    scale: 1.1;
+  }
+
+  &:active {
+    scale: .9;
+  }
+}
